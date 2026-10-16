@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  <meta charset="utf-8">
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Live peer to peer - no server</title>
+
+  <link rel="stylesheet" href="https://cpwebassets.codepen.io/assets/fullpage/fullpage-defe0b00ddddc98ad4bc2c428e9d6182cd7742e2624f558656dbfb986d4ba13c.css" />
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+
+
+  <title>Live peer to peer - no server</title>
+
+  <style>
+    html { font-size: 15px; }
+    html, body { margin: 0; padding: 0; min-height: 100%; }
+    body { height:100%; display: flex; flex-direction: column; }
+    .referer-warning {
+      background: black;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      padding: 0.75em;
+      color: white;
+      text-align: center;
+      font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, system-ui, Sans-Serif;
+      line-height: 1.2;
+      font-size: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+    .referer-warning span { font-family: initial; }
+    .referer-warning h1 { font-size: 1.2rem; margin: 0; }
+    .referer-warning a { color: #56bcf9; }
+  </style>
+</head>
+
+<body class="">
+  <div class="referer-warning">
+    <h1><span>⚠️</span> Do not enter passwords or personal information on this page. <span>⚠️</span></h1>
+      This is a code demo posted by a web developer on <a href="https://codepen.io">CodePen</a>.
+    <br />
+    A referer from CodePen is required to render this page view, and your browser is not sending one (<a href="https://blog.codepen.io/2017/10/05/regarding-referer-headers/" target="_blank" rel="noreferrer noopener">more details</a>).</h1>
+  </div>
+
+  <div id="result-iframe-wrap" role="main">
+    <iframe
+      id="result"
+      srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot; >
+
+<head>
+  
+  <meta charset=&quot;UTF-8&quot;>
+  
+
+    <link rel=&quot;apple-touch-icon&quot; type=&quot;image/png&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png&quot; />
+
+    <meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;CodePen&quot;>
+
+    <link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico&quot; />
+
+    <link rel=&quot;mask-icon&quot; type=&quot;image/x-icon&quot; href=&quot;https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg&quot; color=&quot;#111&quot; />
+
+
+
+  
+    <script src=&quot;https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js&quot;></script>
+
+
+  <title>Live peer to peer - no server</title>
+
+    <link rel=&quot;canonical&quot; href=&quot;https://codepen.io/ZachSaucier/pen/jOoNaP&quot;>
+  
+  
+  
+  
+<style>
+* {
+    padding: 0;
+    margin: 0;
+}
+html, body, .msgs {
+    height: 100%;
+    width: 100%;
+    cursor: none;
+    position: relative;
+}
+.msgs {
+    pointer-events:none;
+    position: absolute;
+    top: 0;
+    user-select: none;
+    font-family: &quot;Helvetica&quot;;
+    font-size: 10pt;
+}
+.msgCenter {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 1px;
+    height: 1px;
+}
+.user>p {
+}
+.user li {
+    margin-left: 18px;
+    text-indent: -5px;
+    font-size: 9pt;
+}
+.console {
+    height: 260px;
+    width: 250px;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+}
+.console .log {
+    position: absolute;
+    bottom: 40px;
+}
+.console .chat {
+    background-color: rgba(0, 0, 0, .02);
+    height: 40px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    bottom: 0;
+    outline:none;
+    border:0;
+}
+.outl {
+    outline: lightgray 1px solid !important;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate=&quot;no&quot;>
+  <!-- <button>sdf</button> -->
+<div class=&quot;msgs&quot;>
+    <div class=&quot;msgCenter&quot;></div>
+    <div class=&quot;user&quot;>
+        <p>Users In room</p>
+        <ol>
+            <li> <span class=&quot;name &quot;>You</span>
+            </li>
+        </ol>
+    </div>
+    <div class=&quot;console&quot;>
+        <div class=&quot;log&quot;></div>
+        <input class=&quot;chat&quot; maxlength=&quot;25&quot;></input>
+    </div>
+</div>
+<canvas id=&quot;can&quot;></canvas>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://rawgit.com/sindresorhus/screenfull.js/gh-pages/dist/screenfull.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+<script src='https://rawgit.com/peers/peerjs/master/dist/peer.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/chance/0.5.6/chance.js'></script>
+    <script id=&quot;rendered-js&quot; >
+var $canvas = $('#can'),
+ctx = $canvas[0].getContext(&quot;2d&quot;),
+w = $canvas.parent().width() - 1,
+h = $canvas.parent().height() - 3,
+RAD = 40,
+peers = [];
+
+
+function main() {
+  init();
+  animate();
+  network.init();
+  console.log('started');
+}
+
+function init() {
+  $canvas[0].width = w;
+  $canvas[0].height = h;
+  peers.push(new peerCont(null, null, getColor(), 0, 0, false, chance.name()));
+  $('.user .name').text(peers[0].name);
+
+  $(window).mousemove(function (e) {
+    peers[0].active = 1;
+    peers[0].x = e.pageX;
+    peers[0].y = e.pageY;
+  }).on(&quot;keydown&quot;, function (e) {
+    if (e.which == 13) {
+      chat.active ? chat.disable() : chat.activate();
+    }
+  });
+  document.oncontextmenu = new Function(&quot;return false;&quot;);
+}
+
+function draw() {
+  for (var i = 0; i < peers.length; i++) {
+    if (!peers[i].active) continue;
+    drawCircle(peers[i].x, peers[i].y, RAD, peers[i].color);
+  }
+}
+
+function drawCircle(x, y, rad, color) {
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.arc(x, y, rad, 0, 2 * Math.PI);
+  ctx.fill();
+}
+
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+  draw();
+  network.send(peers[0].x, peers[0].y);
+  network.kickClosed();
+  requestAnimationFrame(animate);
+}
+
+function getColor() {
+  return &quot;rgb(&quot; + rand(255) + &quot;,&quot; + rand(255) + &quot;,&quot; + rand(255) + &quot;)&quot;;
+}
+
+function rand(x) {
+  return ~~(Math.random() * x);
+}
+
+function tellUser() {}
+
+function peerCont(id, peer, color, x, y, active, name) {
+  this.x = null;
+  this.y = null;
+  this.id = id;
+  this.color = color;
+  this.active = null;
+  this.peer = peer;
+  this.name = name;
+}
+
+
+var network = {
+  num: 0,
+  ids: ids = ['a123', 'b123', 'c123', 'd123', 'e123', 'f123', 'g123', 'h123', 'i123', 'j123', 'k123', 'l123'],
+  send: function (x, y) {
+    for (var i = 1; i < peers.length; i++) {
+      peers[i].peer.send([&quot;cords&quot;, x, y]);
+    }
+  },
+  init: function () {
+    this.getId();
+  },
+  getId: function () {
+    var x;
+    x = new Peer(ids[this.num], {
+      key: '0of84d1q9f0cc8fr' });
+
+    x.on('open', function (id) {
+      chat.update(&quot;Game&quot;, &quot;Connected To Server..Your Id: &quot; + ids[network.num]);
+      peers[0].peer = x;
+      peers[0].id = network.ids[network.num];
+      network.connectToPeers();
+    });
+    x.on('error', function (err) {
+      if (err.type != &quot;unavailable-id&quot;) return;
+      if (network.num < network.ids.length - 1) {
+        network.num++;
+        network.getId();
+      } else {
+        network.full();
+      }
+
+    });
+  },
+  full: function () {
+    chat.update(&quot;Game&quot;, &quot;Slots Full try refereshing in few seconds!&quot;);
+  },
+
+  kickClosed: function () {
+    peers.forEach(function (x, i) {
+      if (x.peer &amp;&amp; !x.peer.open) {
+        chat.update(x.name, 'dropped');
+        peers.splice(i, 1);
+        chat.removeUser(x.name);
+      }
+    });
+  },
+  connectToPeers: function () {
+    this.ids.forEach(function (x, i) {
+      if (peers[0].id == x) {
+        return;
+      }
+
+      var con = peers[0].peer.connect(x);
+      con.on('open', network.addPeer);
+    });
+
+    peers[0].peer.on('connection', function (x) {
+      x.on('open', network.addPeer);
+    });
+  },
+  addPeer: function (id) {
+    var x = new peerCont(id, this);
+    peers.push(x);
+    console.log(peers);
+    this.on('data', function (data) {
+      if (data == &quot;getData&quot;) {
+        console.log(&quot;sending Name&quot;);
+        this.send(
+        [&quot;hereisData&quot;, peers[0].name, peers[0].color, peers[0].x, peers[0].y]);
+      }
+      if (data[0] == &quot;hereisData&quot;) {
+        console.log(&quot;revd. Name&quot;);
+        chat.update(data[1], 'connected');
+        console.log(data[1]);
+        x.name = data[1];
+        x.color = data[2];
+        x.x = data[3];
+        x.y = data[4];
+        x.active = 1;
+        x.id = x.peer.id;
+        chat.addUser(x);
+      } else if (data[0] == &quot;cords&quot;) {
+        x.x = data[1];
+        x.y = data[2];
+      } else if (data[0] == &quot;msg&quot;) {
+        chat.update(x.name, data[1]);
+      }
+    });
+    network.getData(this);
+  },
+
+  getData: function (x) {
+    x.send(&quot;getData&quot;);
+  } };
+
+
+
+var chat = {
+  log: $('.console .log'),
+  ele: $('.console .chat'),
+  active: false,
+  activate: function () {
+    this.active = true;
+    this.ele.focus().addClass('outl');
+  },
+  disable: function () {
+    this.active = false;
+    this.update('you', this.ele.val());
+    this.ele.blur().val(&quot;&quot;).removeClass('outl');
+  },
+  update: function (user, msg) {
+    var p = $('<p></p>').text(user + &quot;: &quot; + msg);
+    if (user == &quot;you&quot;) this.submit(msg);
+    setTimeout(function () {
+      p.fadeOut(300, function () {
+        $(this).remove();
+      });
+    }, 4000);
+    this.log.append(p);
+  },
+  submit: function (msg) {
+    for (var i = 1; i < peers.length; i++) {
+      peers[i].peer.send([&quot;msg&quot;, msg]);
+    }
+  },
+  addUser: function (x) {
+    console.log(x);
+    var p = $('.user ol li').clone();
+    p.find('.name').text(x.name);
+    p.appendTo($('.user ol'));
+  },
+  removeUser: function (x) {
+    $('.user ol li').has('span:contains(' + x + ')').remove();
+  } };
+
+
+//function get32Color (r,g,b,a) {a = a || 255; return (a<<24)|(b<<16)|(g<<8)|r;}
+
+/* not working in jsfiddle, fullscreen.
+$('button').click(function(){
+
+    if (screenfull.enabled) {
+        screenfull.request(target);
+    }
+    });
+
+*/
+
+//shim for different browsers
+(function () {
+  for (var d = 0, a = [&quot;ms&quot;, &quot;moz&quot;, &quot;webkit&quot;, &quot;o&quot;], b = 0; b < a.length &amp;&amp; !window.requestAnimationFrame; ++b) window.requestAnimationFrame = window[a[b] + &quot;RequestAnimationFrame&quot;], window.cancelAnimationFrame = window[a[b] + &quot;CancelAnimationFrame&quot;] || window[a[b] + &quot;CancelRequestAnimationFrame&quot;];
+  window.requestAnimationFrame || (window.requestAnimationFrame = function (b) {
+    var a = new Date().getTime(),
+    c = Math.max(0, 16 - (a - d)),
+    e = window.setTimeout(function () {
+      b(a + c);
+    }, c);
+    d = a + c;
+    return e;
+  });
+  window.cancelAnimationFrame || (window.cancelAnimationFrame = function (a) {
+    clearTimeout(a);
+  });
+})();
+
+main();
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
+"
+      sandbox="allow-downloads allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts allow-top-navigation-by-user-activation" allow="accelerometer *; bluetooth *; camera *; clipboard-read *; clipboard-write *; display-capture *; encrypted-media *; geolocation *; gyroscope *; language-detector *; language-model *; local-network-access *; microphone *; midi *; rewriter *; serial *; summarizer *; translator *; web-share *; writer *; xr-spatial-tracking *" allowTransparency="true"
+      allowpaymentrequest="true" allowfullscreen="true" class="result-iframe">
+      </iframe>
+  </div>
+
+</body>
+
+</html>
