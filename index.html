@@ -6,80 +6,212 @@
   <meta charset="UTF-8">
   
 
-
-
+ 
   
 
-  <title>I Love You </title>
+  <title>love</title>
 
-   
-  <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
-
+ 
+  
   
   
 <style>
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+html {
+
+    box-sizing: border-box;
+    --bgColorMenu : #1d1d27;
+    --duration: .7s;    
+
 }
 
-html, body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FFC568;
-  font-size: 62.5%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background: none !important;
-  background-color: transparent !important;
-}
-@media screen and (max-width: 520px) {
-  html, body {
-    /* don't know how to set default units to rem in mojs :(( */
-  }
+html *,
+html *::before,
+html *::after {
+
+    box-sizing: inherit;
+
 }
 
-.container {
-  width: 50rem;
-  height: 20rem;
-  position: relative;
+body{
+    
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    minn-height: 100vh;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffb457;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--duration);
+
+}
+
+.menu{
+
+    margin: 0;
+    display: flex;
+    /* Works well with 100% width  */
+    width: 32.05em;
+    font-size: 1.5em;
+    padding: 0 2.85em;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColorMenu);
+    position: fixed !important;
+    bottom: 0px !important;
+    /*rotate: 180deg;*/
+    background: none;
+    z-index: 1000;
+    
+}
+.menu__border{
+  display: none;
+}
+.menu *{
+
+
+}
+
+.menu__item{
+    
+    all: unset;
+    flex-grow: 1;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+    align-items: center;
+    will-change: transform;
+    justify-content: center;
+    padding: 0.55em 0 0.85em;
+    transition: transform var(--timeOut , var(--duration));
+
+    
+}
+
+.menu__item::before{
+    
+    content: "";
+    z-index: -1;
+    width: 4.2em;
+    height: 4.2em;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    transition: background-color var(--duration), transform var(--duration);
+    
+}
+
+
+.menu__item.active {
+
+    transform: translate3d(0, -.8em , 0);
+
+}
+
+.menu__item.active::before{
+    
+    transform: scale(1);
+    background-color: var(--bgColorItem);
+
+}
+
+.icon{
+    
+    width: 2.6em;
+    height: 2.6em;
+    stroke: white;
+    fill: transparent;
+    stroke-width: 1pt;
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+    
+}
+
+.menu__item.active .icon {
+
+    animation: strok 1.5s reverse;
+    
+}
+
+@keyframes strok {
+
+    100% {
+
+        stroke-dashoffset: 400;
+
+    }
+
+}
+
+.menu__border{
+
+    left: 0;
+    bottom: 99%;
+    width: 10.9em;
+    height: 2.4em;
+    position: absolute;
+    clip-path: url(#menu);
+    will-change: transform;
+    background-color: var(--bgColorMenu);
+    transition: transform var(--timeOut , var(--duration));
+    
 }
 
 .svg-container {
-  z-index: 2;
-  position: absolute;
+
+    width: 0;
+    height: 0;
 }
 
-.mo-container {
+
+@media screen and (max-width: 50em) {
+    .menu{
+        font-size: .8em;
+    }
+}
+
+
+.thehidden{
+  display: none;
+}
+
+
+#theholderr{
+
+}
+
+
+.theholderr{
+
+}
+
+
+.pageit{
+
+position: fixed;
+top:0;
+bottom:0;
+margin; 0 auto;
+right: 0;
+left: 0;
+
+
+}
+
+.itsifrrame{
+
+  border: none;
+  outline: none;
   width: 100%;
   height: 100%;
-}
+  min-height: 100vh;
 
-.line {
-  fill: none;
-  stroke: #FFFFFF;
-  stroke-width: 8;
-  stroke-linecap: round;
-  stroke-miterlimit: 10;
-}
-
-.lttr {
-  fill: #763C8C;
-}
-
-.sound {
-  position: fixed;
-  color: #763C8C;
-  font-size: 1.6rem;
-  bottom: 1rem;
-  right: 1rem;
-  text-decoration: underline;
-  cursor: default;
-}
-.sound--off {
-  text-decoration: line-through;
 }
 </style>
 
@@ -92,394 +224,142 @@ html, body {
 </head>
 
 <body translate="no">
-  <div class="container">
-  <svg class="svg-container" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 200">
-    <line class="line line--left" x1="10" y1="17" x2="10" y2="183"> </line>
-    <line class="line line--rght" x1="490" y1="17" x2="490" y2="183"> </line>
-    <g>
-      <path class="lttr lttr--I" d="M42.2,73.9h11.4v52.1H42.2V73.9z"></path>
-      <path class="lttr lttr--L" d="M85.1,73.9h11.4v42.1h22.8v10H85.1V73.9z"></path>
-      <path class="lttr lttr--O" d="M123.9,100c0-15.2,11.7-26.9,27.2-26.9s27.2,11.7,27.2,26.9s-11.7,26.9-27.2,26.9S123.9,115.2,123.9,100zM166.9,100c0-9.2-6.8-16.5-15.8-16.5c-9,0-15.8,7.3-15.8,16.5s6.8,16.5,15.8,16.5C160.1,116.5,166.9,109.2,166.9,100z"> </path>
-      <path class="lttr lttr--V" d="M180.7,73.9H193l8.4,22.9c1.7,4.7,3.5,9.5,5,14.2h0.1c1.7-4.8,3.4-9.4,5.2-14.3l8.6-22.8h11.7l-19.9,52.1h-11.5L180.7,73.9z"></path>
-      <path class="lttr lttr--E" d="M239.1,73.9h32.2v10h-20.7v10.2h17.9v9.5h-17.9v12.4H272v10h-33V73.9z"></path>
-      <path class="lttr lttr--Y" d="M315.8,102.5l-20.1-28.6H309l6.3,9.4c2,3,4.2,6.4,6.3,9.6h0.1c2-3.2,4.1-6.4,6.3-9.6l6.3-9.4h12.9l-19.9,28.5v23.6h-11.4V102.5z"></path>
-      <path class="lttr lttr--O2" d="M348.8,100c0-15.2,11.7-26.9,27.2-26.9c15.5,0,27.2,11.7,27.2,26.9s-11.7,26.9-27.2,26.9C360.5,126.9,348.8,115.2,348.8,100z M391.8,100c0-9.2-6.8-16.5-15.8-16.5c-9,0-15.8,7.3-15.8,16.5s6.8,16.5,15.8,16.5C385,116.5,391.8,109.2,391.8,100z"></path>
-      <path class="lttr lttr--U" d="M412.4,101.1V73.9h11.4v26.7c0,10.9,2.4,15.9,11.5,15.9c8.4,0,11.4-4.6,11.4-15.8V73.9h11v26.9c0,7.8-1.1,13.5-4,17.7c-3.7,5.3-10.4,8.4-18.7,8.4c-8.4,0-15.1-3.1-18.8-8.5C413.4,114.2,412.4,108.5,412.4,101.1z"></path>
-    </g>
-  </svg>
-  <div class="mo-container"> </div>
-</div>
+  <menu class="menu">
+    
+    <button class="menu__item active" style="--bgColorItem: #ff8c00;" >
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M3.8,6.6h16.4"/>
+        <path d="M20.2,12.1H3.8"/>
+        <path d="M3.8,17.5h16.4"/>
+      </svg>
+    </button>
+
+    <button class="menu__item" style="--bgColorItem: #f54888;">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path  d="M6.7,4.8h10.7c0.3,0,0.6,0.2,0.7,0.5l2.8,7.3c0,0.1,0,0.2,0,0.3v5.6c0,0.4-0.4,0.8-0.8,0.8H3.8
+        C3.4,19.3,3,19,3,18.5v-5.6c0-0.1,0-0.2,0.1-0.3L6,5.3C6.1,5,6.4,4.8,6.7,4.8z"/>
+        <path  d="M3.4,12.9H8l1.6,2.8h4.9l1.5-2.8h4.6"/>
+      </svg>
+    </button>
+
+    <button class="menu__item" style="--bgColorItem: #4343f5;" >
+      <svg class="icon" viewBox="0 0 24 24">
+      <path  d="M3.4,11.9l8.8,4.4l8.4-4.4"/>
+      <path  d="M3.4,16.2l8.8,4.5l8.4-4.5"/>
+      <path  d="M3.7,7.8l8.6-4.5l8,4.5l-8,4.3L3.7,7.8z"/>
+    </button>
+
+    <button class="menu__item" style="--bgColorItem: #e0b115;" > 
+      <svg class="icon" viewBox="0 0 24 24" >
+        <path  d="M5.1,3.9h13.9c0.6,0,1.2,0.5,1.2,1.2v13.9c0,0.6-0.5,1.2-1.2,1.2H5.1c-0.6,0-1.2-0.5-1.2-1.2V5.1
+          C3.9,4.4,4.4,3.9,5.1,3.9z"/>
+        <path  d="M4.2,9.3h15.6"/>
+        <path  d="M9.1,9.5v10.3"/>
+    </button>
+
+    <button class="menu__item" style="--bgColorItem:#65ddb7;">
+      <svg class="icon" viewBox="0 0 24 24" >
+        <path  d="M5.1,3.9h13.9c0.6,0,1.2,0.5,1.2,1.2v13.9c0,0.6-0.5,1.2-1.2,1.2H5.1c-0.6,0-1.2-0.5-1.2-1.2V5.1
+          C3.9,4.4,4.4,3.9,5.1,3.9z"/>
+        <path  d="M5.5,20l9.9-9.9l4.7,4.7"/>
+        <path  d="M10.4,8.8c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6C7.3,8,8,7.3,8.9,7.3C9.7,7.3,10.4,8,10.4,8.8z"/>
+      </svg>
+    </button>
+
+    <div class="menu__border"></div>
+
+  </menu>
+
+  <div class="svg-container">
+    <svg viewBox="0 0 202.9 45.5" >
+      <clipPath id="menu" clipPathUnits="objectBoundingBox" transform="scale(0.0049285362247413 0.021978021978022)">
+        <path  d="M6.7,45.5c5.7,0.1,14.1-0.4,23.3-4c5.7-2.3,9.9-5,18.1-10.5c10.7-7.1,11.8-9.2,20.6-14.3c5-2.9,9.2-5.2,15.2-7
+          c7.1-2.1,13.3-2.3,17.6-2.1c4.2-0.2,10.5,0.1,17.6,2.1c6.1,1.8,10.2,4.1,15.2,7c8.8,5,9.9,7.1,20.6,14.3c8.3,5.5,12.4,8.2,18.1,10.5
+          c9.2,3.6,17.6,4.2,23.3,4H6.7z"/>
+      </clipPath>
+    </svg>
+  </div>
 
 
-<audio class="blup" style="display: none">
-  <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio >
-<audio class="blop" style="display: none">
-  <source src="https://www.freesound.org/data/previews/265/265115_4373976-lq.mp3" type="audio/ogg">
-</audio>
-<div class="sound">sound</div>
-  <script src='https://cdn.jsdelivr.net/mojs/latest/mo.min.js'></script>
+  <div class="theholderr" id="theholderr">
+
+
+  <div class="pageit" id="pageone">
+    <div class="iframeholder">
+      <iframe src="https://love.hello.click/index.html" class="itsifrrame"></iframe>
+<!-- 
+<iframe src="https://love.hello.click/heart.html" class="itsifrrame"></iframe>
+
+<iframe src="https://love.hello.click/clock.html" class="itsifrrame"></iframe> --> 
+    </div>
+  </div>
+
+
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+<!--
+  <script src="https://cdn.jsdelivr.net/npm/responsive-iframe@0.0.1/responsive-iframe.min.js"></script>
+
+-->
+  
     <script id="rendered-js" >
-const qs = document.querySelector.bind(document);
-const easingHeart = mojs.easing.path('M0,100C2.9,86.7,33.6-7.3,46-7.3s15.2,22.7,26,22.7S89,0,100,0');
+// Designed by:  Mauricio Bucardo
+// Original image:
+// https://dribbble.com/shots/5619509-Animated-Tab-Bar
 
-const el = {
-  container: qs('.mo-container'),
+"use strict";
 
-  i: qs('.lttr--I'),
-  l: qs('.lttr--L'),
-  o: qs('.lttr--O'),
-  v: qs('.lttr--V'),
-  e: qs('.lttr--E'),
-  y: qs('.lttr--Y'),
-  o2: qs('.lttr--O2'),
-  u: qs('.lttr--U'),
+const body = document.body;
+const bgColorsBody = ["#ffb457", "#ff96bd", "#9999fb", "#ffe797", "#cffff1"];
+const menu = body.querySelector(".menu");
+const menuItems = menu.querySelectorAll(".menu__item");
+const menuBorder = menu.querySelector(".menu__border");
+let activeItem = menu.querySelector(".active");
 
-  lineLeft: qs('.line--left'),
-  lineRight: qs('.line--rght'),
+function clickItem(item, index) {
 
-  colTxt: "#763c8c",
-  colHeart: "#fa4843",
+  menu.style.removeProperty("--timeOut");
 
-  blup: qs('.blup'),
-  blop: qs('.blop'),
-  sound: qs('.sound') };
+  if (activeItem == item) return;
 
-
-class Heart extends mojs.CustomShape {
-  getShape() {
-    return '<path d="M50,88.9C25.5,78.2,0.5,54.4,3.8,31.1S41.3,1.8,50,29.9c8.7-28.2,42.8-22.2,46.2,1.2S74.5,78.2,50,88.9z"/>';
+  if (activeItem) {
+    activeItem.classList.remove("active");
   }
-  getLength() {return 200;}}
-
-mojs.addShape('heart', Heart);
-
-const crtBoom = (delay = 0, x = 0, rd = 46) => {
-  parent = el.container;
-  const crcl = new mojs.Shape({
-    shape: 'circle',
-    fill: 'none',
-    stroke: el.colTxt,
-    strokeWidth: { 5: 0 },
-    radius: { [rd]: [rd + 20] },
-    easing: 'quint.out',
-    duration: 500 / 3,
-    parent,
-    delay,
-    x });
 
 
-  const brst = new mojs.Burst({
-    radius: { [rd + 15]: 110 },
-    angle: 'rand(60, 180)',
-    count: 3,
-    timeline: { delay },
-    parent,
-    x,
-    children: {
-      radius: [5, 3, 7],
-      fill: el.colTxt,
-      scale: { 1: 0, easing: 'quad.in' },
-      pathScale: [.8, null],
-      degreeShift: ['rand(13, 60)', null],
-      duration: 1000 / 3,
-      easing: 'quint.out' } });
+  item.classList.add("active");
+  body.style.backgroundColor = bgColorsBody[index];
+  activeItem = item;
+  offsetMenuBorder(activeItem, menuBorder);
 
 
+}
 
-  return [crcl, brst];
-};
+function offsetMenuBorder(element, menuBorder) {
 
-const crtLoveTl = () => {
-  const move = 1000;
-  const boom = 200;
-  const easing = 'sin.inOut';
-  const easingBoom = 'sin.in';
-  const easingOut = 'sin.out';
-  const opts = { duration: move, easing, opacity: 1 };
-  const delta = 150;
+  const offsetActiveItem = element.getBoundingClientRect();
+  const left = Math.floor(offsetActiveItem.left - menu.offsetLeft - (menuBorder.offsetWidth - offsetActiveItem.width) / 2) + "px";
+  menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
 
-  return new mojs.Timeline().add([
-  new mojs.Tween({
-    duration: move,
-    onStart: () => {
-      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-        el.style.opacity = 1;
-        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;';
-      });
-    },
-    onComplete: () => {
-      [el.l, el.o, el.v, el.e].forEach(el => el.style.opacity = 0);
-      el.blop.play();
-    } }),
+}
 
+offsetMenuBorder(activeItem, menuBorder);
 
-  new mojs.Tween({
-    duration: move * 2 + boom,
-    onComplete: () => {
-      [el.y, el.o2].forEach(el => el.style.opacity = 0);
-      el.blop.play();
-    } }),
+menuItems.forEach((item, index) => {
 
+  item.addEventListener("click", () => clickItem(item, index));
 
-  new mojs.Tween({
-    duration: move * 3 + boom * 2 - delta,
-    onComplete: () => {
-      el.i.style.opacity = 0;
-      el.blop.play();
-    } }),
+});
 
-
-  new mojs.Tween({
-    duration: move * 3 + boom * 2,
-    onComplete: () => {
-      el.u.style.opacity = 0;
-      el.blup.play();
-    } }),
-
-
-  new mojs.Tween({
-    duration: 50,
-    delay: 4050,
-    onUpdate: progress => {
-      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-        el.style = `transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: ${1 * progress};`;
-      });
-    },
-    onComplete: () => {
-      [el.i, el.l, el.o, el.v, el.e, el.y, el.o2, el.u].forEach(el => {
-        el.style.opacity = 1;
-        el.style = 'transform: translate(0px, 0px) rotate(0deg) skew(0deg, 0deg) scale(1, 1); opacity: 1;';
-      });
-    } }),
-
-
-  new mojs.Html({
-    ...opts,
-    el: el.lineLeft,
-    x: { 0: 52 } }).
-  then({
-    duration: boom + move,
-    easing,
-    x: { to: 52 + 54 } }).
-  then({
-    duration: boom + move,
-    easing,
-    x: { to: 52 + 54 + 60 } }).
-  then({
-    duration: 150, // 3550
-    easing,
-    x: { to: 52 + 54 + 60 + 10 } }).
-  then({
-    duration: 300 }).
-  then({
-    duration: 350,
-    x: { to: 0 },
-    easing: easingOut }),
-
-
-  new mojs.Html({
-    ...opts,
-    el: el.lineRight,
-    x: { 0: -52 } }).
-  then({
-    duration: boom + move,
-    easing,
-    x: { to: -52 - 54 } }).
-  then({
-    duration: boom + move,
-    easing,
-    x: { to: -52 - 54 - 60 } }).
-  then({
-    duration: 150,
-    easing,
-    x: { to: -52 - 54 - 60 - 10 } }).
-  then({
-    duration: 300 }).
-  then({
-    duration: 350,
-    x: { to: 0 },
-    easing: easingOut }),
-
-
-  new mojs.Html({ // [I] LOVE YOU
-    ...opts,
-    el: el.i,
-    x: { 0: 34 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: 34 + 19 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: 34 + 19 + 40 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: 34 + 19 + 40 + 30 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: 34 + 19 + 40 + 30 + 30 } }),
-
-
-  new mojs.Html({ // I [L]OVE YOU
-    ...opts,
-    el: el.l,
-    x: { 0: 15 } }),
-
-
-  new mojs.Html({ // I L[O]VE YOU
-    ...opts,
-    el: el.o,
-    x: { 0: 11 } }),
-
-
-  new mojs.Html({ // I LO[V]E YOU
-    ...opts,
-    el: el.v,
-    x: { 0: 3 } }),
-
-
-  new mojs.Html({ // I LOV[E] YOU
-    ...opts,
-    el: el.e,
-    x: { 0: -3 } }),
-
-
-  new mojs.Html({ // I LOVE [Y]OU
-    ...opts,
-    el: el.y,
-    x: { 0: -20 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: -20 - 33 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: -20 - 33 - 24 } }),
-
-
-  new mojs.Html({ // I LOVE Y[O]U
-    ...opts,
-    el: el.o2,
-    x: { 0: -27 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: -27 - 27 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: -27 - 27 - 30 } }),
-
-
-  new mojs.Html({ // I LOVE YO[U]
-    ...opts,
-    el: el.u,
-    x: { 0: -32 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: -32 - 21 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: -32 - 21 - 36 } }).
-  then({
-    duration: boom,
-    easing: easingBoom,
-    x: { to: -32 - 21 - 36 - 31 } }).
-  then({
-    duration: move,
-    easing,
-    x: { to: -32 - 21 - 36 - 31 - 27 } }),
-
-
-  new mojs.Shape({
-    parent: el.container,
-    shape: 'heart',
-    delay: move,
-    fill: el.colHeart,
-    x: -64,
-    scale: { 0: 0.95, easing: easingHeart },
-    duration: 500 }).
-  then({
-    x: { to: -62, easing },
-    scale: { to: 0.65, easing },
-    duration: boom + move - 500 }).
-  then({
-    duration: boom - 50,
-    x: { to: -62 + 48 },
-    scale: { to: 0.90 },
-    easing: easingBoom }).
-  then({
-    duration: 125,
-    scale: { to: 0.8 },
-    easing: easingOut }).
-  then({
-    duration: 125,
-    scale: { to: 0.85 },
-    easing: easingOut }).
-  then({
-    duration: move - 200,
-    scale: { to: 0.45 },
-    easing }).
-  then({
-    delay: -75,
-    duration: 150,
-    x: { to: 0 },
-    scale: { to: 0.90 },
-    easing: easingBoom }).
-  then({
-    duration: 125,
-    scale: { to: 0.8 },
-    easing: easingOut }).
-  then({
-    duration: 125, // 3725
-    scale: { to: 0.85 },
-    easing: easingOut }).
-  then({
-    duration: 125 // 3850
-  }).then({
-    duration: 350,
-    scale: { to: 0 },
-    easing: easingOut }),
-
-
-  ...crtBoom(move, -64, 46),
-  ...crtBoom(move * 2 + boom, 18, 34),
-  ...crtBoom(move * 3 + boom * 2 - delta, -64, 34),
-  ...crtBoom(move * 3 + boom * 2, 45, 34)]);
-
-};
-
-const loveTl = crtLoveTl().play();
-setInterval(() => {loveTl.replay();}, 4300);
-
-const volume = 0.2;
-el.blup.volume = volume;
-el.blop.volume = volume;
-
-const toggleSound = () => {
-  let on = true;
-  return () => {
-    if (on) {
-      el.blup.volume = 0.0;
-      el.blop.volume = 0.0;
-      el.sound.classList.add('sound--off');
-    } else
-    {
-      el.blup.volume = volume;
-      el.blop.volume = volume;
-      el.sound.classList.remove('sound--off');
-    }
-    on = !on;
-  };
-};
-el.sound.addEventListener('click', toggleSound());
+window.addEventListener("resize", () => {
+  offsetMenuBorder(activeItem, menuBorder);
+  menu.style.setProperty("--timeOut", "none");
+});
+//# sourceURL=pen.js
   </script>
 
   
