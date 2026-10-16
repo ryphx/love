@@ -1,14 +1,14 @@
 {
-  "short_name": "StaticPWA",
-  "name": "Static CDN Progressive Web App",
+  "short_name": "LOVE",
+  "name": "07101007",
   "icons": [
     {
-      "src": "https://placeholder.com",
+      "src": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/iheartradio.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "https://placeholder.com",
+      "src": "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/iheartradio.svg",
       "type": "image/png",
       "sizes": "512x512"
     }
