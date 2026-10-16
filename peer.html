@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>P2P Touch Mirror</title>
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #121212; font-family: sans-serif; }
+        #canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+        #ui { position: absolute; z-index: 10; padding: 15px; color: white; background: rgba(0,0,0,0.6); border-radius: 0 0 10px 0; }
+        input, button { padding: 8px; margin: 4px 0; font-size: 14px; border-radius: 4px; border: none; }
+        button { background: #007bff; color: white; cursor: pointer; }
+    </style>
+    <!-- Import PeerJS Library -->
+    <script src="https://unpkg.com"></script>
+</head>
+<body>
+
+    <div id="ui">
+        <div>Your ID: <strong id="my-id">...</strong></div>
+        <input type="text" id="peer-id-input" placeholder="Enter Peer ID">
+        <button id="connect-btn">Connect Peer</button>
+        <div id="status" style="color: #ffc107; margin-top: 5px;">Status: Initializing...</div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let peer = null;
+        let conn = null;
+
+        // Touch positions (percentages: 0 to 1)
+        let localTouch = null;
+        let remoteTouch = null;
+
+        // Resize canvas dynamically to match window layout
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            draw();
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Initialize PeerJS (using free default cloud brokering)
+        peer = new Peer();
+
+        peer.on('open', (id) => {
+            document.getElementById('my-id').innerText = id;
+            document.getElementById('status').innerText = "Status: Ready to connect";
+        });
+
+        // Handle incoming connection requests
+        peer.on('connection', (incomingConn) => {
+            conn = incomingConn;
+            setupDataHandlers();
+        });
+
+        // Handle outbound manual connection requests
+        document.getElementById('connect-btn').addEventListener('click', () => {
+            const peerId = document.getElementById('peer-id-input').value.trim();
+            if (peerId) {
+                conn = peer.connect(peerId);
+                setupDataHandlers();
+            }
+        });
+
+        function setupDataHandlers() {
+            document.getElementById('status').innerText = "Status: Connecting...";
+            
+            conn.on('open', () => {
+                document.getElementById('status').innerText = `Status: Connected to ${conn.peer}`;
+                document.getElementById('status').style.color = '#28a745';
+            });
+
+            // Listen for incoming coordinate vectors from the remote peer
+            conn.on('data', (data) => {
+                if (data.type === 'touch') {
+                    remoteTouch = data.pos; // Contains raw {x, y} ratios
+                    draw();
+                } else if (data.type === 'touchend') {
+                    remoteTouch = null;
+                    draw();
+                }
+            });
+
+            conn.on('close', () => {
+                document.getElementById('status').innerText = "Status: Connection Closed";
+                document.getElementById('status').style.color = '#dc3545';
+                remoteTouch = null;
+                draw();
+            });
+        }
+
+        // Render thumbprints onto canvas
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw local thumbprint indicator (Blue)
+            if (localTouch) {
+                drawThumbprint(localTouch.x * canvas.width, localTouch.y * canvas.height, '#007bff', 'You');
+            }
+
+            // Draw remote mirrored thumbprint indicator (Green)
+            if (remoteTouch) {
+                drawThumbprint(remoteTouch.x * canvas.width, remoteTouch.y * canvas.height, '#28a745', 'Peer');
+            }
+        }
+
+        function drawThumbprint(x, y, color, label) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, 35, 0, 2 * Math.PI);
+            ctx.fillStyle = color + '44'; // 25% alpha opacity fill
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = color;
+            ctx.stroke();
+
+            // Label text offset
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '14px sans-serif';
+            ctx.fillText(label, x - 15, y - 45);
+            ctx.restore();
+        }
+
+        // Capture touch events and calculate view percentages 
+        function handleTouch(e) {
+            if (e.touches.length === 0) return;
+            e.preventDefault(); // Prevents standard scrolling/zooming gestures
+
+            const touch = e.touches[0];
+            
+            // Map absolute pixels to relative position ratios [0.0 - 1.0]
+            localTouch = {
+                x: touch.clientX / window.innerWidth,
+                y: touch.clientY / window.innerHeight
+            };
+
+            // Stream position vectors natively across P2P RTC Data Channel
+            if (conn && conn.open) {
+                conn.send({ type: 'touch', pos: localTouch });
+            }
+            draw();
+        }
+
+        canvas.addEventListener('touchstart', handleTouch, { passive: false });
+        canvas.addEventListener('touchmove', handleTouch, { passive: false });
+        
+        canvas.addEventListener('touchend', (e) => {
+            localTouch = null;
+            if (conn && conn.open) {
+                conn.send({ type: 'touchend' });
+            }
+            draw();
+        });
+    </script>
+</body>
+</html>

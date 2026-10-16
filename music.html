@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>muse✨</title>
+
+  
+  
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,400,600'>
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.3.1/css/all.css'>
+  
+<style>
+body {
+  font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  color: #fff;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  -moz-user-select: none;
+       user-select: none;
+  /* Standard syntax */
+  display: flex;
+  flex-direction: column;
+  background: #181818;
+  z-index: 2;
+  background: -webkit-linear-gradient(to top, #232526, #414345);
+}
+body a {
+  color: inherit;
+}
+body a:not(:hover) {
+  text-decoration: none;
+}
+body #link-a-me {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  height: 60px;
+  width: 60px;
+  background: url(https://i.imgur.com/xoxkq1r.png);
+  background-size: cover;
+  z-index: 1;
+  -webkit-animation: pop-in 120s ease-out;
+          animation: pop-in 120s ease-out;
+}
+body .content {
+  overflow: hidden;
+  flex-grow: 1;
+  height: calc(100% - 80px);
+}
+body .content .lyrics {
+  padding: 50vh 0;
+  min-height: calc(100vh - 80px);
+  width: calc(100% - 40px);
+  margin: 0 20px;
+  text-align: center;
+  transition: all 0.25s;
+  position: relative;
+}
+body .content .lyrics > div {
+  position: relative;
+  font-size: 40px;
+  line-height: 80px;
+  color: #666;
+  transition: all 0.25s;
+}
+body .content .lyrics > div:before {
+  content: attr(note);
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+body .content .lyrics > div.highlighted {
+  color: #fff;
+  font-size: 48px;
+}
+body .player {
+  z-index: 10;
+  background: #F9F9F9;
+  background: none;
+  color: #000;
+  color: white;
+  min-height: 80px;
+  max-height: 80px;
+  display: flex;
+  flex-direction: row;
+}
+
+body .player .left {
+  width: 80px;
+  background-image: url(https://www.rollingstone.com/wp-content/uploads/2018/06/rs-14380-20140210-her-x1800-1392073779.jpg);
+  background-size: cover;
+}
+body .player .right {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+body .player .right .top {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 10px;
+}
+body .player .right .top .song {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+body .player .right .bottom {
+  display: flex;
+}
+body .player .right .bottom audio {
+  flex-grow: 1;
+  height: 32px;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  -moz-user-select: none;
+       user-select: none;
+  /* Standard syntax */
+}
+audio {
+    background: none !important;
+    max-width: 50%;
+    margin: 0 auto !important;
+}
+
+@-webkit-keyframes pop-in {
+  0%, 95% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes pop-in {
+  0%, 95% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0.05;
+}
+
+body .player {
+    z-index: 10;
+    background: #F9F9F9;
+    background: none;
+    color: #000;
+    color: white;
+    min-height: 80px;
+    max-height: 80px;
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+    padding: 45px;
+    background: none !important;
+    border-top: 2px solid white;
+}
+
+body{
+  overflow: hidden;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="content">
+  <div class="lyrics"></div>
+</div>
+
+<div class="player">
+  <div class="left"></div>
+  <div class="right">
+    <div class="top">
+      <a class="song" href="#">The Moon Song</a>
+      <a class="artist" href="#">Karen O</a>
+    </div>
+    <div class="bottom">
+         <audio controls="" _autoplay="" name="media"><source src="https://ia802809.us.archive.org/24/items/KarenOTheMoonSong_201808/Karen%20O%20-%20The%20Moon%20Song.mp3"></audio>
+    </div>
+  </div>
+</div>
+
+<video autoplay muted loop id="myVideo">
+  <source src="//projectno51.000webhostapp.com/data/extended%20sources/videoplayback%20(7).mp4" type="video/mp4">
+</video>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js'></script>
+    <script id="rendered-js" >
+console.clear();
+var _data = JSON.parse(
+`{"lyrics":[
+  {"line":"","time":-1},
+  {"line":"I'm lying on the moon","note":"Verse 1","time":14000},
+  {"line":"My dear, I'll be there soon","time":23300},
+  {"line":"It's a quiet and starry place","time":33000},
+  {"line":"Time's we're swallowed up","time":43000},
+  {"line":"In space we're here a million miles away","time":48300},
+  
+  {"line":"","time":54300},
+  
+  {"line":"There's things I wish I knew","note":"Verse 2","time":58200},
+  {"line":"There's no thing I'd keep from you","time":68000},
+  {"line":"It's a dark and shiny place","time":78000},
+  {"line":"But with you my dear","time":87000},
+  {"line":"I'm safe and we're a million miles away","time":92500},
+  
+  {"line":"","time":99000},
+  
+  {"line":"We're lying on the moon","note":"Verse 3","time":102500},
+  {"line":"It's a perfect afternoon","time":112000},
+  {"line":"Your shadow follows me all day","time":122000},
+  {"line":"Making sure that I'm okay","time":131500},
+  {"line":"And we're a million miles away","time":138900},
+   
+  {"line":"","time":144000}]}`);
+
+var currentLine = "";
+
+function align() {
+  var a = $(".highlighted").height();
+  var c = $(".content").height();
+  var d =
+  $(".highlighted").offset().top - $(".highlighted").parent().offset().top;
+  var e = d + a / 2 - c / 2;
+  $(".content").animate(
+  { scrollTop: e + "px" },
+  { easing: "swing", duration: 250 });
+
+}
+
+var lyricHeight = $(".lyrics").height();
+$(window).on("resize", function () {
+  if ($(".lyrics").height() != lyricHeight) {
+    //Either width changes so that a line may take up or use less vertical space or the window height changes, 2 in 1
+    lyricHeight = $(".lyrics").height();
+    align();
+  }
+});
+
+$(document).ready(function () {
+  $("audio").on("timeupdate", function (e) {
+    var time = this.currentTime * 1000;
+    var past = _data["lyrics"].filter(function (item) {
+      return item.time < time;
+    });
+    if (_data["lyrics"][past.length] != currentLine) {
+      currentLine = _data["lyrics"][past.length];
+      $(".lyrics div").removeClass("highlighted");
+      $(`.lyrics div:nth-child(${past.length})`).addClass("highlighted"); //Text might take up more lines, do before realigning
+      align();
+    }
+  });
+});
+
+generate();
+
+function generate() {
+  var html = "";
+  for (var i = 0; i < _data["lyrics"].length; i++) {if (window.CP.shouldStopExecution(0)) break;
+    html += "<div";
+    if (i == 0) {
+      html += ` class="highlighted"`;
+      currentLine = 0;
+    }
+    if (_data["lyrics"][i]["note"]) {
+      html += ` note="${_data["lyrics"][i]["note"]}"`;
+    }
+    html += ">";
+    html += _data["lyrics"][i]["line"] == "" ? "•" : _data["lyrics"][i]["line"];
+    html += "</div>";
+  }window.CP.exitedLoop(0);
+  $(".lyrics").html(html);
+  align();
+}
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>

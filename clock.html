@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  
+  <meta charset="UTF-8">
+  
+
+    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+
+    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+
+    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
+
+
+
+  
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
+
+
+  <title>Date Time Countdown Timer</title>
+
+    <link rel="canonical" href="https://codepen.io/terasol/pen/gJmzwP">
+  
+  
+  
+  
+<style>
+body {
+    text-align: center;
+    padding: 70px 50px;
+    background: #0D1A29;
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+#timer {
+    font-size: 3em;
+    font-weight: 100;
+    color: white;
+    text-shadow: 0 0 20px #48C8FF;
+}
+
+#timer div {
+    display: inline-block;
+    min-width: 90px;
+}
+
+#timer div span {
+    color: #B1CDF1;
+    display: block;
+    font-size: .35em;
+    font-weight: 400;
+}
+
+.cont{
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  line-height: 55px;
+   min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+body{
+  overflow: hidden;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+</head>
+
+<body translate="no">
+  <div class="cont">
+
+  <div id="timer"></div>
+
+  </div>
+    <script id="rendered-js" >
+function updateTimer() {
+ // const today = new Date();
+//const dayOfMonth = today.getDate(); 
+
+//console.log(dayOfMonth); // Example output: 16
+
+  future = Date.parse("October 16, 2026 19:30:00");
+  now = new Date();
+  diff = future - now;
+
+  days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  hours = Math.floor(diff / (1000 * 60 * 60));
+  mins = Math.floor(diff / (1000 * 60));
+  secs = Math.floor(diff / 1000);
+
+  d = days;
+  h = hours - days * 24;
+  m = mins - hours * 60;
+  s = secs - mins * 60;
+
+  document.getElementById("timer").
+  innerHTML =
+  '<div>' + d + '<span>days</span></div>' +
+  '<div>' + h + '<span>hours</span></div>' +
+  '<div>' + m + '<span>minutes</span></div>' +
+  '<div>' + s + '<span>seconds</span></div>';
+}
+setInterval('updateTimer()', 1000);
+//# sourceURL=pen.js
+  </script>
+
+  
+</body>
+
+</html>
