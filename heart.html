@@ -37,7 +37,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background: none;
+  background: none !important;
 }
 
 .like-button {
@@ -266,6 +266,8 @@ body {
   justify-content: center;
   align-items: center;
   background-color: var(--color-bg);
+  background-color: transparent;
+  background: none;
 }
 
 /* Reset the animation when clicking again! */
@@ -325,14 +327,15 @@ setTimeout(() => b.blur(), 1000);
   </script>
 
   <script>
-Swal.fire("Click the heart!");
+//Swal.fire("Click the heart!");
+    //ryan
 
 
 $(document).ready(function() {
     // Listens for a click on an element with the ID "myButton"
     $(".dynamic-svg-class").on("click", function() {
-        alert("Button was clicked!");
-        Swal.fire("SweetAlert2 is working!");
+       // alert("Button was clicked!");
+        //Swal.fire("SweetAlert2 is working!");
     });
 });
 
