@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Static PWA</title>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#317EFB">
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="https://placeholder.com">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-md text-center max-w-sm">
+        <h1 class="text-2xl font-bold text-gray-800 mb-2">Static CDN PWA</h1>
+        <p class="text-gray-600 mb-4">Hosted on GitHub Pages without a build step!</p>
+        <div id="status" class="text-sm font-semibold text-yellow-600">Checking connection...</div>
+    </div>
+
+    <script>
+        // 1. Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // Adjust path if your GitHub project is in a subdirectory (e.g., '/repo-name/sw.js')
+                const scope = window.location.pathname.includes('/repo-name/') ? '/repo-name/' : '/';
+                navigator.serviceWorker.register('./sw.js', { scope: scope })
+                    .then(reg => console.log('Service Worker registered!', reg))
+                    .catch(err => console.error('Service Worker registration failed:', err));
+            });
+        }
+
+        // 2. Simple UI updates for online/offline status
+        const statusDiv = document.getElementById('status');
+        function updateStatus() {
+            if (navigator.onLine) {
+                statusDiv.textContent = "🟢 Online";
+                statusDiv.className = "text-sm font-semibold text-green-600";
+            } else {
+                statusDiv.textContent = "🔴 Offline (Running from Cache)";
+                statusDiv.className = "text-sm font-semibold text-red-600";
+            }
+        }
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+        updateStatus();
+    </script>
+</body>
+</html>

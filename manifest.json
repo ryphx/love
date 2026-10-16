@@ -1,0 +1,21 @@
+{
+  "short_name": "StaticPWA",
+  "name": "Static CDN Progressive Web App",
+  "icons": [
+    {
+      "src": "https://placeholder.com",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://placeholder.com",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#317EFB",
+  "theme-color": "#317EFB",
+  "display": "standalone",
+  "orientation": "portrait"
+}
