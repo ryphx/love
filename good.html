@@ -8,13 +8,10 @@
 
  
   
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-f07739098a39bd4e74ddd974652dac904146f33fdc1ecab356e8c809a05faccb.js"></script>
-
 
   <title>love</title>
 
-    <link rel="canonical" href="https://codepen.io/abxlfazl/pen/VwKzaEm">
-  
+ 
   
   
   
@@ -66,6 +63,7 @@ body{
     bottom: 0px !important;
     /*rotate: 180deg;*/
     background: none;
+    z-index: 1000;
     
 }
 .menu__border{
@@ -90,6 +88,7 @@ body{
     justify-content: center;
     padding: 0.55em 0 0.85em;
     transition: transform var(--timeOut , var(--duration));
+
     
 }
 
@@ -191,6 +190,27 @@ body{
 .theholderr{
 
 }
+
+
+.pageit{
+
+position: fixed;
+top:0;
+bottom:0;
+margin; 0 auto;
+right: 0;
+left: 0;
+
+
+}
+
+.itsifrrame{
+
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 75vh;
+}
 </style>
 
   <script>
@@ -261,10 +281,25 @@ body{
 
   <div class="theholderr" id="theholderr">
 
+
+  <div class="pageit" id="pageone">
+    <div class="iframeholder">
+      <iframe src="https://love.hello.click/clock.html" class="itsifrrame"></iframe>
+
+    </div>
+  </div>
+
+
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+
+<!--
+  <script src="https://cdn.jsdelivr.net/npm/responsive-iframe@0.0.1/responsive-iframe.min.js"></script>
+
+-->
   
     <script id="rendered-js" >
 // Designed by:  Mauricio Bucardo
